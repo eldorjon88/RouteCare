@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RouteCare</title>
+  <link rel="stylesheet" href="shared/styles/tokens.css" />
+  <link rel="stylesheet" href="shared/styles/base.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-brand"><span class="logo">🚑</span> RouteCare</div>
+    <button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode">🌓</button>
+  </header>
+
+  <main class="app-main stack">
+    <div class="card">
+      <h1>RouteCare</h1>
+      <p>Real-time ambulance dispatch for rural Uzbekistan. Open an app to get started:</p>
+    </div>
+
+    <div class="stack">
+      <a class="card row row--between" href="patient-app/">
+        <span><strong>🧑‍🦽 Patient app</strong><br /><small>Call an ambulance and track it</small></span>
+        <span aria-hidden="true">→</span>
+      </a>
+      <a class="card row row--between" href="driver-app/">
+        <span><strong>🚑 Driver app</strong><br /><small>Accept calls and update status</small></span>
+        <span aria-hidden="true">→</span>
+      </a>
+      <a class="card row row--between" href="dispatch-dashboard/">
+        <span><strong>🗺️ Dispatch dashboard</strong><br /><small>Assign and monitor calls</small></span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <small class="text-center">⚠️ In development — not for real emergencies. In an emergency, call 103 or 112.</small>
+  </main>
+
+  <script src="shared/js/config.js"></script>
+  <script src="shared/js/theme.js"></script>
+</body>
+</html>
