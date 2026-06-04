@@ -1,6 +1,6 @@
 -- RouteCare database schema (PostgreSQL 14+) — tables for the "routecare" database.
 -- 1. Create the database (once):  psql -U postgres -f database/create-database.sql
--- 2. Apply this schema:           npm run db:init   (or: psql -d routecare -f database/schema.sql)
+-- 2. Apply this schema:           python scripts/init_db.py   (or: psql -d routecare -f database/schema.sql)
 
 -- Users: a person is one of patient | driver | dispatcher.
 CREATE TABLE IF NOT EXISTS users (

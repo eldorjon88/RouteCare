@@ -60,11 +60,11 @@ To become the most trusted ambulance-coordination platform for underserved regio
 | Layer | Choice |
 | --- | --- |
 | Frontend | Vanilla HTML5 / CSS3 / JavaScript (ES6+), mobile-first |
-| Real-time | Socket.io (WebSockets) |
+| Real-time | Native WebSockets (FastAPI WebSocket endpoint) |
 | Maps | Google Maps API *(Yandex Maps is worth evaluating for rural coverage)* |
-| Backend | Node.js 18+ with Express |
-| Database | PostgreSQL 14+ |
-| Auth | Phone OTP + JWT, bcrypt-hashed codes |
+| Backend | Python 3.11+ with FastAPI (Uvicorn ASGI server) |
+| Database | PostgreSQL 14+ via SQLAlchemy |
+| Auth | Phone OTP + JWT (PyJWT), bcrypt-hashed codes |
 | Hosting | Vercel (frontend) · Railway/Render (backend) · managed PostgreSQL |
 
 > Full design system, coding standards, and conventions live in **[CLAUDE.md](CLAUDE.md)**.
@@ -80,13 +80,20 @@ RouteCare/
 │   ├── patient-app/        # Call an ambulance, track it
 │   ├── driver-app/         # Accept calls, set status
 │   └── dispatch-dashboard/ # Assign & monitor calls
-├── backend/
-│   ├── server.js           # Express + Socket.io entry point
-│   ├── routes/             # auth, calls, drivers
-│   ├── services/           # otp, dispatch (nearest-ambulance)
-│   ├── models/             # users, calls
-│   ├── middleware/         # JWT auth & role guards
-│   └── sockets/            # real-time handlers
+├── app/                        # FastAPI backend (Python)
+│   ├── main.py                 # FastAPI app: CORS, routers, /ws, static, errors
+│   ├── config.py               # env handling (python-dotenv)
+│   ├── database.py             # SQLAlchemy engine, session, Base
+│   ├── models.py               # ORM models (users, ambulances, calls, otp_codes)
+│   ├── schemas.py              # Pydantic request/response models
+│   ├── security.py             # JWT + auth dependencies (role guards)
+│   ├── rate_limit.py           # slowapi limiter
+│   ├── websocket.py            # WebSocket connection manager
+│   ├── crud.py                 # SQLAlchemy data access
+│   ├── routers/                # auth, calls, drivers
+│   └── services/               # otp_service, dispatch_service
+├── scripts/
+│   └── init_db.py              # apply database/schema.sql
 ├── database/
 │   └── schema.sql          # PostgreSQL schema
 ├── README.md
@@ -97,31 +104,37 @@ RouteCare/
 
 ## 🚧 Getting started
 
-**Prerequisites:** Node.js 18+ and PostgreSQL 14+. See **[requirements.txt](requirements.txt)** for the full list of requirements and dependencies.
+**Prerequisites:** Python 3.11+ and PostgreSQL 14+. See **[requirements.txt](requirements.txt)** for the full list of dependencies.
 
 ```bash
-# 1. Install backend dependencies
-npm install
+# 1. Create & activate a virtual environment
+python -m venv .venv
+source .venv/Scripts/activate     # Git Bash on Windows
+# .\.venv\Scripts\Activate.ps1    # PowerShell
 
-# 2. Configure environment
-cp .env.example .env        # then edit values (DB password, JWT secret, etc.)
+# 2. Install dependencies
+pip install -r requirements.txt
 
-# 3. Create the database (once) — creates the "routecare" database
+# 3. Configure environment
+cp .env.example .env              # then edit DB password, JWT secret, etc.
+
+# 4. Create the database (once) — creates the "routecare" database
 psql -U postgres -f database/create-database.sql
 
-# 4. Create the tables
-npm run db:init
+# 5. Create the tables
+python scripts/init_db.py
 
-# 5. Run the server (also serves the frontend apps in dev)
-npm run dev
+# 6. Run the server (also serves the frontend apps)
+uvicorn app.main:app --reload --port 8000
 ```
 
 Then open:
 
-- Landing page → http://localhost:4000/
-- Patient app → http://localhost:4000/patient-app/
-- Driver app → http://localhost:4000/driver-app/
-- Dispatch dashboard → http://localhost:4000/dispatch-dashboard/
+- Landing page → http://localhost:8000/
+- Patient app → http://localhost:8000/patient-app/
+- Driver app → http://localhost:8000/driver-app/
+- Dispatch dashboard → http://localhost:8000/dispatch-dashboard/
+- API docs (bonus) → http://localhost:8000/docs
 
 > In development, OTP codes are printed to the **server console** (no SMS provider needed). Add a Maps API key in `frontend/shared/js/config.js` to enable maps.
 

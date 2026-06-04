@@ -17,11 +17,20 @@ RouteCare/
 │   ├── patient-app/        # Patient interface (call ambulance, track)
 │   ├── driver-app/         # Driver interface (accept calls, navigate)
 │   └── dispatch-dashboard/ # Admin panel (manage calls, view analytics)
-├── backend/
-│   ├── server.js
-│   ├── routes/
-│   ├── models/
+├── app/                    # FastAPI backend (Python)
+│   ├── main.py
+│   ├── config.py
+│   ├── database.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── security.py
+│   ├── websocket.py
+│   ├── crud.py
+│   ├── routers/
 │   └── services/
+├── scripts/
+│   └── init_db.py
+├── requirements.txt
 ├── database/
 │   └── schema.sql
 ├── public/                 # Static assets
@@ -75,20 +84,21 @@ RouteCare/
 - **Languages:** HTML5, CSS3, JavaScript (ES6+)
 - **Framework:** Vanilla JavaScript (no dependencies initially)
 - **Maps:** Google Maps API (real-time markers, routing)
-- **Real-time:** WebSockets (Socket.io) for live location updates
+- **Real-time:** Native WebSockets for live location updates
 - **Authentication:** JWT tokens in localStorage
 - **HTTP:** Fetch API for REST calls
 - **Responsive:** Mobile-first design, works on all screen sizes
 
 ### Backend
 
-- **Runtime:** Node.js 18+
-- **Framework:** Express.js
-- **Database:** PostgreSQL 14+
-- **Real-time:** Socket.io for WebSocket communication
-- **Authentication:** JWT (jsonwebtoken)
-- **Hashing:** bcrypt for password security
-- **Environment:** dotenv for config
+- **Runtime:** Python 3.11+
+- **Framework:** FastAPI (Uvicorn ASGI server)
+- **Database:** PostgreSQL 14+ via SQLAlchemy
+- **Real-time:** Native WebSockets (FastAPI WebSocket endpoint)
+- **Authentication:** JWT (PyJWT)
+- **Hashing:** bcrypt for OTP codes
+- **Environment:** python-dotenv for config
+- **Rate limiting:** slowapi
 
 ### Infrastructure
 
@@ -247,7 +257,7 @@ As features are built:
 ## 📝 Important Notes
 
 - **Ambulance Simulation:** For testing, use realistic ambulance movement simulation (not instant jumps)
-- **Real-time Updates:** Socket.io emits location updates every 2–3 seconds
+- **Real-time Updates:** The backend emits WebSocket location updates every 2–3 seconds
 - **Map Updates:** Google Maps shows real-time markers; update positions smoothly
 - **Dark Mode:** Implement toggle, save preference in localStorage
 - **Offline Support:** Plan for poor connectivity in rural areas
@@ -270,8 +280,8 @@ When building RouteCare:
 
 - **Project Lead:** Alisher
 - **Google Maps API Docs:** https://developers.google.com/maps
-- **Socket.io Docs:** https://socket.io/docs/
-- **Express.js Docs:** https://expressjs.com/
+- **FastAPI Docs:** https://fastapi.tiangolo.com/
+- **SQLAlchemy Docs:** https://docs.sqlalchemy.org/
 - **PostgreSQL Docs:** https://www.postgresql.org/docs/
 
 ---
