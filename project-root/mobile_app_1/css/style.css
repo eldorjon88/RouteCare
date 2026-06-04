@@ -1,0 +1,45 @@
+:root {
+  --accent: #1976D2;   /* App 1 theme: blue */
+  --bg: #f5f7fa; --card: #fff; --text: #222; --muted: #777;
+  --border: #e3e8ef; --danger: #d32f2f;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, Arial, sans-serif; background: var(--bg); color: var(--text); }
+.app-header {
+  background: var(--accent); color: #fff; padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0;
+}
+.app-header h1 { font-size: 18px; margin: 0; }
+.container { max-width: 520px; margin: 0 auto; padding: 16px; }
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+h2 { font-size: 16px; margin: 0 0 12px; }
+h3 { font-size: 15px; margin: 0 0 4px; }
+.input {
+  width: 100%; padding: 11px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 15px; margin-bottom: 10px; font-family: inherit;
+}
+textarea.input { min-height: 70px; resize: vertical; }
+.input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+.row { display: flex; gap: 10px; }
+.btn {
+  flex: 1; background: var(--accent); color: #fff; border: none; border-radius: 8px;
+  padding: 12px; font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.btn:active { opacity: .9; }
+.btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.link { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 14px; }
+.link.light { color: #fff; }
+.link.danger, .danger { color: var(--danger); }
+.note { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.note p { color: var(--muted); margin: 0; white-space: pre-wrap; }
+.empty { text-align: center; color: var(--muted); }
+.msg { color: var(--danger); font-size: 13px; min-height: 16px; margin: 8px 0 0; }
+.hidden { display: none; }
+/* shared task styles (used by App 2) */
+.task { display: flex; align-items: center; gap: 10px; }
+.task input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
+.task span { flex: 1; }
+.task.done span { text-decoration: line-through; color: var(--muted); }
