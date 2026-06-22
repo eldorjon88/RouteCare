@@ -1,2 +1,21 @@
 /* Driver app specific styles */
 #calls .card { justify-content: space-between; }
+
+/* Turn-by-turn navigation panel */
+.nav-panel {
+  padding: 12px; border: 1px solid var(--color-border);
+  border-radius: var(--radius-card); background: var(--color-surface);
+}
+.nav-head {
+  display: flex; justify-content: space-between; align-items: center;
+  font-weight: var(--fw-bold); margin-bottom: 8px;
+}
+.nav-eta { color: var(--color-secondary); font-weight: var(--fw-bold); }
+.nav-steps { list-style: none; margin: 0; padding: 0; }
+.nav-steps li {
+  display: flex; justify-content: space-between; gap: 8px;
+  padding: 8px 10px; border-radius: 6px;
+  font-size: var(--fs-small); color: var(--color-text-muted);
+}
+.nav-steps li.nav-next { background: var(--color-bg); color: var(--color-text); font-weight: var(--fw-medium); }
+.nav-steps li span { color: var(--color-text-muted); white-space: nowrap; }

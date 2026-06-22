@@ -68,14 +68,23 @@ a.card { text-decoration: none; color: inherit; }
 }
 .input:focus { outline: 2px solid var(--color-secondary); outline-offset: 1px; }
 
-/* Map placeholder (replaced by Google/Yandex Maps once a key is configured) */
+/* Map container (Leaflet). The explicit height is REQUIRED — without it
+   Leaflet renders an invisible 0-height map. */
 .map {
   width: 100%; height: 320px;
   border-radius: var(--radius-card); border: 1px solid var(--color-border);
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  color: var(--color-text-muted); padding: var(--space-2);
-  background: repeating-linear-gradient(45deg, var(--color-border) 0 10px, transparent 10px 20px);
+  overflow: hidden; /* clip square tiles to the rounded corners */
+  background: #1a1a1a; /* matches the dark tiles while they load */
 }
+
+/* Map markers (shared via MapKit). Override Leaflet's default white div-icon box. */
+.leaflet-marker-icon.mk-marker {
+  background: none; border: none; font-size: 22px; line-height: 1; text-align: center;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+}
+/* Smooth glide for live (ambulance) markers as positions stream in. */
+.leaflet-marker-icon.mk-glide { transition: transform 0.9s linear; }
+@media (prefers-reduced-motion: reduce) { .leaflet-marker-icon.mk-glide { transition: none; } }
 
 /* Icon button (e.g. theme toggle) */
 .icon-btn {

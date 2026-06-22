@@ -1,2 +1,16 @@
 /* Patient app specific styles */
 .btn--emergency { box-shadow: 0 4px 12px rgba(229, 57, 53, 0.35); }
+
+/* Address search dropdown (Nominatim results) — uses existing theme tokens */
+.search-results {
+  list-style: none; margin: -6px 0 0; padding: 4px;
+  border: 1px solid var(--color-border); border-radius: var(--radius-card);
+  background: var(--color-surface); max-height: 220px; overflow-y: auto;
+}
+.search-results .search-item {
+  padding: 10px 12px; border-radius: 6px; cursor: pointer; font-size: var(--fs-small);
+}
+.search-results .search-item:hover { background: var(--color-bg); }
+.search-results .search-empty {
+  padding: 10px 12px; color: var(--color-text-muted); font-size: var(--fs-small);
+}

@@ -83,7 +83,7 @@ RouteCare/
 
 - **Languages:** HTML5, CSS3, JavaScript (ES6+)
 - **Framework:** Vanilla JavaScript (no dependencies initially)
-- **Maps:** Google Maps API (real-time markers, routing)
+- **Maps:** Leaflet.js + OpenStreetMap (CartoDB Dark Matter tiles, no API key)
 - **Real-time:** Native WebSockets for live location updates
 - **Authentication:** JWT tokens in localStorage
 - **HTTP:** Fetch API for REST calls
@@ -258,7 +258,7 @@ As features are built:
 
 - **Ambulance Simulation:** For testing, use realistic ambulance movement simulation (not instant jumps)
 - **Real-time Updates:** The backend emits WebSocket location updates every 2–3 seconds
-- **Map Updates:** Google Maps shows real-time markers; update positions smoothly
+- **Map Updates:** Leaflet shows real-time markers; update positions smoothly
 - **Dark Mode:** Implement toggle, save preference in localStorage
 - **Offline Support:** Plan for poor connectivity in rural areas
 - **Phone Numbers:** Use E.164 format (`+998XXXXXXXXX` for Uzbekistan)
@@ -279,7 +279,7 @@ When building RouteCare:
 ## 📞 Key Contacts & Resources
 
 - **Project Lead:** Alisher
-- **Google Maps API Docs:** https://developers.google.com/maps
+- **Leaflet Docs:** https://leafletjs.com/reference.html
 - **FastAPI Docs:** https://fastapi.tiangolo.com/
 - **SQLAlchemy Docs:** https://docs.sqlalchemy.org/
 - **PostgreSQL Docs:** https://www.postgresql.org/docs/

@@ -61,7 +61,7 @@ To become the most trusted ambulance-coordination platform for underserved regio
 | --- | --- |
 | Frontend | Vanilla HTML5 / CSS3 / JavaScript (ES6+), mobile-first |
 | Real-time | Native WebSockets (FastAPI WebSocket endpoint) |
-| Maps | Google Maps API *(Yandex Maps is worth evaluating for rural coverage)* |
+| Maps | Leaflet.js + OpenStreetMap (CartoDB dark tiles — no API key needed) |
 | Backend | Python 3.11+ with FastAPI (Uvicorn ASGI server) |
 | Database | PostgreSQL 14+ via SQLAlchemy |
 | Auth | Phone OTP + JWT (PyJWT), bcrypt-hashed codes |
